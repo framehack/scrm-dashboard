@@ -34,7 +34,7 @@ export default [
           {
             name: '员工登录',
             path: '/staff-admin/login',
-            component: './StaffAdmin/Login',
+            component: './StaffAdmin/LoginByPassword',
           },
         ],
       },
@@ -57,7 +57,7 @@ export default [
 
       // 普通管理员授权路由
       {
-        name:'普通管理员授权路由',
+        name: '普通管理员授权路由',
         path: '/staff-admin/',
         component: '../layouts/StaffAdminSecurityLayout',
         routes: [

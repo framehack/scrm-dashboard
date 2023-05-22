@@ -1,15 +1,15 @@
-import {Alert, message, Result, Spin} from 'antd';
-import React, {useState} from 'react';
+import { Alert, message, Result, Spin } from 'antd';
+import React, { useState } from 'react';
 
 import styles from './index.less';
 import Title from 'antd/es/typography/Title';
 import Paragraph from 'antd/es/typography/Paragraph';
 // @ts-ignore
 import ScriptTag from 'react-script-tag';
-import type {GetStaffAdminLoginQrcodeResp} from '@/services/staffAdmin';
-import {GetStaffAdminLoginQrcode, StaffAdminForceLogin} from '@/services/staffAdmin';
-import {CodeOK} from '../../../../config/constant';
-import type {CommonResp} from '@/services/common';
+import type { GetStaffAdminLoginQrcodeResp } from '@/services/staffAdmin';
+import { GetStaffAdminLoginQrcode, StaffAdminForceLogin } from '@/services/staffAdmin';
+import { CodeOK } from '../../../../config/constant';
+import type { CommonResp } from '@/services/common';
 
 export type StatusType = 'loading' | 'failed' | 'success' | '';
 
@@ -47,7 +47,7 @@ const QrcodeLogin: React.FC = () => {
 
 
     // 演示环境使用调试登录，不用扫码登录
-    if (window.location.href.includes("dashboard.demo.openscrm.cn")) {
+    if (window.location.href.includes("dashboard.dev.openscrm.cn")) {
       message.info("演示环境无需扫码登录，3秒后自动登录", 3000);
       setTimeout(() => {
         StaffAdminForceLogin().then((res: CommonResp) => {
@@ -56,7 +56,7 @@ const QrcodeLogin: React.FC = () => {
             return;
           }
 
-          window.location.href = "http://dashboard.demo.openscrm.cn:8000/staff-admin/welcome";
+          window.location.href = "http://dashboard.dev.openscrm.cn:9000/staff-admin/welcome";
         }).catch((err) => {
           message.error("自动登录失败")
           console.log("err", err)
@@ -73,9 +73,9 @@ const QrcodeLogin: React.FC = () => {
         <Title
           level={1}
           className={styles.title}
-          style={{fontWeight: 500, fontSize: '28px', marginBottom: '8px'}}
+          style={{ fontWeight: 500, fontSize: '28px', marginBottom: '8px' }}
         >
-          企业微信扫码登录
+          企业微信扫码登录222
         </Title>
         <Paragraph className={styles.desc}>安全，强大，易开发的开源企业微信SCRM</Paragraph>
       </div>
@@ -91,12 +91,12 @@ const QrcodeLogin: React.FC = () => {
       )}
       {status === 'loading' && (
         <div className={styles.placeholder}>
-          <Spin size={'large'}/>
+          <Spin size={'large'} />
         </div>
       )}
       {status === 'failed' && (
         <div className={styles.placeholder}>
-          <Result status={'warning'} title="系统错误" subTitle="请联系管理员"/>
+          <Result status={'warning'} title="系统错误" subTitle="请联系管理员" />
         </div>
       )}
 

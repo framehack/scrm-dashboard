@@ -1,5 +1,5 @@
 import request from '@/utils/request';
-import {StaffAdminApiPrefix} from '../../config/constant';
+import { StaffAdminApiPrefix } from '../../config/constant';
 
 export interface StaffAdminRoleInterface {
   id: string;
@@ -62,13 +62,20 @@ export interface GetStaffAdminLoginQrcodeResp {
 export async function GetStaffAdminLoginQrcode(extCorpID: string, sourceURL: string) {
   return request(`${StaffAdminApiPrefix}/action/login`, {
     method: 'POST',
-    data: {ext_corp_id: extCorpID, source_url: sourceURL},
+    data: { ext_corp_id: extCorpID, source_url: sourceURL },
   });
 }
 
-export async function StaffAdminForceLogin(extCorpID: string = "ww2d3e2957190c6e4c", extStaffID: string = "WangQiang") {
+export async function StaffAdminForceLogin(extCorpID: string = "wwe2631482c4e4e90a", extStaffID: string = "WenNing") {
   return request(`${StaffAdminApiPrefix}/action/force-login`, {
     method: 'POST',
-    data: {ext_corp_id: extCorpID, ext_staff_id: extStaffID},
+    data: { ext_corp_id: extCorpID, ext_staff_id: extStaffID },
+  });
+}
+
+export async function StaffAdminPasswordLogin(extCorpID: string, extStaffID: string, password: string) {
+  return request(`${StaffAdminApiPrefix}/action/login`, {
+    method: 'POST',
+    data: { ext_corp_id: extCorpID, ext_staff_id: extStaffID, password },
   });
 }
