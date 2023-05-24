@@ -1,15 +1,30 @@
-import { Input, Button, Space } from 'antd';
-import React, { useState } from 'react';
+import { Input, Button, Space, message } from 'antd';
+import React, { useEffect } from 'react';
+import type { CommonResp } from '@/services/common';
 
 import styles from './index.less';
 import Title from 'antd/es/typography/Title';
 import Paragraph from 'antd/es/typography/Paragraph';
 // @ts-ignore
-import ScriptTag from 'react-script-tag';
-import { StaffAdminPasswordLogin } from '@/services/staffAdmin';
+import { StaffAdminPasswordLogin, StaffAdminForceLogin } from '@/services/staffAdmin';
 
 const PasswordLogin: React.FC = () => {
+  useEffect(() => {
+    message.info("演示环境无需扫码登录，3秒后自动登录", 3000);
+    setTimeout(() => {
+      StaffAdminForceLogin().then((res: CommonResp) => {
+        if (res.code !== 0) {
+          message.error(res.message)
+          return;
+        }
 
+        window.location.href = `http://${window.location.hostname}:9000/staff-admin/welcome`;
+      }).catch((err) => {
+        message.error("自动登录失败")
+        console.log("err", err)
+      })
+    }, 3000);
+  })
   return (
     <div className={styles.main}>
       <div className={styles.header}>
